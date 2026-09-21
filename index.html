@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free online tools - calculators, converters and useful utilities.">
 <title>FreeTools - Free Online Tools</title>
 
 <style>
@@ -10,57 +11,92 @@
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#f5f7fb;
+  background:#f4f7fb;
   color:#172033;
 }
 header{
   background:#111827;
   color:white;
-  padding:28px 18px;
+  padding:25px 15px;
   text-align:center;
 }
-header h1{margin:0 0 8px;font-size:30px}
-header p{margin:0;color:#cbd5e1}
+header h1{margin:0;font-size:30px}
+header p{margin:8px 0 0;color:#cbd5e1}
 
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:25px auto;
   padding:0 15px;
 }
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
 .card{
   background:white;
-  border-radius:15px;
   padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  border-radius:14px;
+  box-shadow:0 4px 18px rgba(0,0,0,.08);
 }
-.card h2{margin-top:0}
 
-input,button{
+.card h2{
+  margin-top:0;
+  font-size:20px;
+}
+
+input,textarea{
   width:100%;
   padding:13px;
-  margin-top:10px;
+  margin:6px 0;
+  border:1px solid #d5dbe5;
   border-radius:8px;
-  border:1px solid #d1d5db;
-  font-size:16px;
+  font-size:15px;
 }
+
 button{
+  width:100%;
+  padding:13px;
+  margin-top:7px;
+  border:0;
+  border-radius:8px;
   background:#111827;
   color:white;
-  border:0;
   cursor:pointer;
+  font-size:15px;
 }
+
+button:hover{opacity:.9}
+
 .result{
-  margin-top:15px;
+  margin-top:12px;
   padding:12px;
   background:#eef2ff;
   border-radius:8px;
   font-weight:bold;
+  min-height:20px;
 }
+
+.ad{
+  background:white;
+  border:1px dashed #aab4c5;
+  border-radius:12px;
+  padding:25px;
+  text-align:center;
+  margin:20px 0;
+  color:#64748b;
+}
+
 footer{
   text-align:center;
-  padding:30px;
+  padding:35px 15px;
   color:#64748b;
+}
+
+@media(max-width:700px){
+  .tool-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -74,35 +110,85 @@ footer{
 
 <div class="container">
 
-  <div class="card">
-    <h2>🎂 Age Calculator</h2>
-    <input type="date" id="dob">
-    <button onclick="calculateAge()">Calculate Age</button>
-    <div class="result" id="ageResult">Your age will appear here.</div>
+  <div class="ad">
+    Advertisement Space
+    <br>
+    <small>Ads can be added here later</small>
   </div>
 
-  <div class="card">
-    <h2>📊 Percentage Calculator</h2>
-    <input type="number" id="number" placeholder="Enter number">
-    <input type="number" id="percent" placeholder="Enter percentage">
-    <button onclick="calculatePercent()">Calculate</button>
-    <div class="result" id="percentResult">Result will appear here.</div>
+  <div class="tool-grid">
+
+    <!-- AGE CALCULATOR -->
+    <div class="card">
+      <h2>🎂 Age Calculator</h2>
+      <input type="date" id="dob">
+      <button onclick="calculateAge()">Calculate Age</button>
+      <div class="result" id="ageResult">
+        Your age will appear here.
+      </div>
+    </div>
+
+    <!-- PERCENTAGE -->
+    <div class="card">
+      <h2>📊 Percentage Calculator</h2>
+      <input type="number" id="number" placeholder="Enter number">
+      <input type="number" id="percent" placeholder="Enter percentage">
+      <button onclick="calculatePercentage()">Calculate</button>
+      <div class="result" id="percentResult">
+        Result will appear here.
+      </div>
+    </div>
+
+    <!-- EMI -->
+    <div class="card">
+      <h2>💰 EMI Calculator</h2>
+      <input type="number" id="loan" placeholder="Loan amount">
+      <input type="number" id="interest" placeholder="Annual interest rate (%)">
+      <input type="number" id="months" placeholder="Loan period (months)">
+      <button onclick="calculateEMI()">Calculate EMI</button>
+      <div class="result" id="emiResult">
+        Your EMI will appear here.
+      </div>
+    </div>
+
+    <!-- WORD COUNTER -->
+    <div class="card">
+      <h2>📝 Word Counter</h2>
+      <textarea id="text" rows="5" placeholder="Type or paste your text"></textarea>
+      <button onclick="countWords()">Count Words</button>
+      <div class="result" id="wordResult">
+        Word count will appear here.
+      </div>
+    </div>
+
+    <!-- BMI -->
+    <div class="card">
+      <h2>⚖️ BMI Calculator</h2>
+      <input type="number" id="weight" placeholder="Weight (kg)">
+      <input type="number" id="height" placeholder="Height (cm)">
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <div class="result" id="bmiResult">
+        BMI will appear here.
+      </div>
+    </div>
+
+    <!-- DISCOUNT -->
+    <div class="card">
+      <h2>🏷️ Discount Calculator</h2>
+      <input type="number" id="price" placeholder="Original price">
+      <input type="number" id="discount" placeholder="Discount (%)">
+      <button onclick="calculateDiscount()">Calculate</button>
+      <div class="result" id="discountResult">
+        Result will appear here.
+      </div>
+    </div>
+
   </div>
 
-  <div class="card">
-    <h2>💰 EMI Calculator</h2>
-    <input type="number" id="loan" placeholder="Loan amount">
-    <input type="number" id="rate" placeholder="Annual interest rate (%)">
-    <input type="number" id="months" placeholder="Loan period (months)">
-    <button onclick="calculateEMI()">Calculate EMI</button>
-    <div class="result" id="emiResult">Your EMI will appear here.</div>
-  </div>
-
-  <div class="card">
-    <h2>📝 Word Counter</h2>
-    <input type="text" id="text" placeholder="Type or paste your text">
-    <button onclick="countWords()">Count Words</button>
-    <div class="result" id="wordResult">Word count will appear here.</div>
+  <div class="ad">
+    Advertisement Space
+    <br>
+    <small>Monetization section</small>
   </div>
 
 </div>
@@ -115,14 +201,14 @@ footer{
 
 function calculateAge(){
   let dob = new Date(document.getElementById("dob").value);
-  let today = new Date();
-
-  if(!document.getElementById("dob").value){
+  if(!dob.getTime()){
     document.getElementById("ageResult").innerText="Please select your date of birth.";
     return;
   }
 
+  let today = new Date();
   let age = today.getFullYear() - dob.getFullYear();
+
   let month = today.getMonth() - dob.getMonth();
 
   if(month < 0 || (month === 0 && today.getDate() < dob.getDate())){
@@ -133,12 +219,12 @@ function calculateAge(){
     "Your age is " + age + " years.";
 }
 
-function calculatePercent(){
+function calculatePercentage(){
   let number = parseFloat(document.getElementById("number").value);
   let percent = parseFloat(document.getElementById("percent").value);
 
   if(isNaN(number) || isNaN(percent)){
-    document.getElementById("percentResult").innerText="Please enter both values.";
+    document.getElementById("percentResult").innerText="Enter both values.";
     return;
   }
 
@@ -150,22 +236,23 @@ function calculatePercent(){
 
 function calculateEMI(){
   let P = parseFloat(document.getElementById("loan").value);
-  let annualRate = parseFloat(document.getElementById("rate").value);
-  let n = parseFloat(document.getElementById("months").value);
+  let annual = parseFloat(document.getElementById("interest").value);
+  let N = parseFloat(document.getElementById("months").value);
 
-  if(isNaN(P) || isNaN(annualRate) || isNaN(n)){
-    document.getElementById("emiResult").innerText="Please enter all values.";
+  if(isNaN(P) || isNaN(annual) || isNaN(N)){
+    document.getElementById("emiResult").innerText="Enter all values.";
     return;
   }
 
-  let r = annualRate / 12 / 100;
+  let r = annual / 12 / 100;
+
   let emi;
 
   if(r === 0){
-    emi = P / n;
+    emi = P / N;
   }else{
-    emi = P * r * Math.pow(1+r,n) /
-          (Math.pow(1+r,n)-1);
+    emi = P * r * Math.pow(1+r,N) /
+          (Math.pow(1+r,N)-1);
   }
 
   document.getElementById("emiResult").innerText =
@@ -184,6 +271,39 @@ function countWords(){
 
   document.getElementById("wordResult").innerText =
     "Words: " + words;
+}
+
+function calculateBMI(){
+  let weight = parseFloat(document.getElementById("weight").value);
+  let height = parseFloat(document.getElementById("height").value);
+
+  if(isNaN(weight) || isNaN(height) || height <= 0){
+    document.getElementById("bmiResult").innerText="Enter valid values.";
+    return;
+  }
+
+  let h = height / 100;
+  let bmi = weight / (h*h);
+
+  document.getElementById("bmiResult").innerText =
+    "BMI: " + bmi.toFixed(1);
+}
+
+function calculateDiscount(){
+  let price = parseFloat(document.getElementById("price").value);
+  let discount = parseFloat(document.getElementById("discount").value);
+
+  if(isNaN(price) || isNaN(discount)){
+    document.getElementById("discountResult").innerText="Enter both values.";
+    return;
+  }
+
+  let saved = price * discount / 100;
+  let finalPrice = price - saved;
+
+  document.getElementById("discountResult").innerText =
+    "You save ₹" + saved.toFixed(2) +
+    " | Final price: ₹" + finalPrice.toFixed(2);
 }
 
 </script>
