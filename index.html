@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreeTools - Free Online Tools</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+header{
+  background:#111827;
+  color:white;
+  padding:28px 18px;
+  text-align:center;
+}
+header h1{margin:0 0 8px;font-size:30px}
+header p{margin:0;color:#cbd5e1}
+
+.container{
+  max-width:900px;
+  margin:25px auto;
+  padding:0 15px;
+}
+.card{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+.card h2{margin-top:0}
+
+input,button{
+  width:100%;
+  padding:13px;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #d1d5db;
+  font-size:16px;
+}
+button{
+  background:#111827;
+  color:white;
+  border:0;
+  cursor:pointer;
+}
+.result{
+  margin-top:15px;
+  padding:12px;
+  background:#eef2ff;
+  border-radius:8px;
+  font-weight:bold;
+}
+footer{
+  text-align:center;
+  padding:30px;
+  color:#64748b;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛠️ FreeTools</h1>
+  <p>Simple & Free Online Tools</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>🎂 Age Calculator</h2>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+    <div class="result" id="ageResult">Your age will appear here.</div>
+  </div>
+
+  <div class="card">
+    <h2>📊 Percentage Calculator</h2>
+    <input type="number" id="number" placeholder="Enter number">
+    <input type="number" id="percent" placeholder="Enter percentage">
+    <button onclick="calculatePercent()">Calculate</button>
+    <div class="result" id="percentResult">Result will appear here.</div>
+  </div>
+
+  <div class="card">
+    <h2>💰 EMI Calculator</h2>
+    <input type="number" id="loan" placeholder="Loan amount">
+    <input type="number" id="rate" placeholder="Annual interest rate (%)">
+    <input type="number" id="months" placeholder="Loan period (months)">
+    <button onclick="calculateEMI()">Calculate EMI</button>
+    <div class="result" id="emiResult">Your EMI will appear here.</div>
+  </div>
+
+  <div class="card">
+    <h2>📝 Word Counter</h2>
+    <input type="text" id="text" placeholder="Type or paste your text">
+    <button onclick="countWords()">Count Words</button>
+    <div class="result" id="wordResult">Word count will appear here.</div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 FreeTools • Free online tools for everyone
+</footer>
+
+<script>
+
+function calculateAge(){
+  let dob = new Date(document.getElementById("dob").value);
+  let today = new Date();
+
+  if(!document.getElementById("dob").value){
+    document.getElementById("ageResult").innerText="Please select your date of birth.";
+    return;
+  }
+
+  let age = today.getFullYear() - dob.getFullYear();
+  let month = today.getMonth() - dob.getMonth();
+
+  if(month < 0 || (month === 0 && today.getDate() < dob.getDate())){
+    age--;
+  }
+
+  document.getElementById("ageResult").innerText =
+    "Your age is " + age + " years.";
+}
+
+function calculatePercent(){
+  let number = parseFloat(document.getElementById("number").value);
+  let percent = parseFloat(document.getElementById("percent").value);
+
+  if(isNaN(number) || isNaN(percent)){
+    document.getElementById("percentResult").innerText="Please enter both values.";
+    return;
+  }
+
+  let result = (number * percent) / 100;
+
+  document.getElementById("percentResult").innerText =
+    percent + "% of " + number + " = " + result;
+}
+
+function calculateEMI(){
+  let P = parseFloat(document.getElementById("loan").value);
+  let annualRate = parseFloat(document.getElementById("rate").value);
+  let n = parseFloat(document.getElementById("months").value);
+
+  if(isNaN(P) || isNaN(annualRate) || isNaN(n)){
+    document.getElementById("emiResult").innerText="Please enter all values.";
+    return;
+  }
+
+  let r = annualRate / 12 / 100;
+  let emi;
+
+  if(r === 0){
+    emi = P / n;
+  }else{
+    emi = P * r * Math.pow(1+r,n) /
+          (Math.pow(1+r,n)-1);
+  }
+
+  document.getElementById("emiResult").innerText =
+    "Monthly EMI: ₹" + emi.toFixed(2);
+}
+
+function countWords(){
+  let text = document.getElementById("text").value.trim();
+
+  if(text === ""){
+    document.getElementById("wordResult").innerText="Words: 0";
+    return;
+  }
+
+  let words = text.split(/\s+/).length;
+
+  document.getElementById("wordResult").innerText =
+    "Words: " + words;
+}
+
+</script>
+
+</body>
+</html>
